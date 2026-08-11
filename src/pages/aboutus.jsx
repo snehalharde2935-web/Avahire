@@ -44,25 +44,6 @@ const About = () => (
                 ))}
             </div>
 
-            <div className="mt-16 text-center">
-                <h2 className="text-3xl font-extrabold text-slate-900">Meet the team</h2>
-                <div className="mt-8 grid md:grid-cols-4 gap-6">
-                    {[
-                        { n: "Priya Mehta", r: "CEO & Co-founder", i: "fa-user-tie", c: "from-violet-500 to-indigo-600" },
-                        { n: "Rahul Sharma", r: "CTO", i: "fa-code", c: "from-blue-500 to-cyan-600" },
-                        { n: "Sneha Kapoor", r: "Head of Product", i: "fa-lightbulb", c: "from-amber-500 to-orange-600" },
-                        { n: "Arjun Verma", r: "Head of AI", i: "fa-brain", c: "from-emerald-500 to-teal-600" },
-                    ].map((m) => (
-                        <div key={m.n} className="bg-white border border-slate-200 rounded-3xl p-6 card-hover">
-                            <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${m.c} text-white mx-auto flex items-center justify-center text-2xl shadow-lg`}>
-                                <i className={`fa-solid ${m.i}`}></i>
-                            </div>
-                            <div className="mt-4 font-bold text-slate-900">{m.n}</div>
-                            <div className="text-sm text-slate-500">{m.r}</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
         </section>
         <Footer />
     </div>

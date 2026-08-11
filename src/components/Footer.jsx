@@ -17,7 +17,6 @@ const Footer = () => {
                     <ul className="space-y-2.5 text-sm">
                         <li><Link to="/features" className="hover:text-violet-400">Features</Link></li>
                         <li><Link to="/how-it-works" className="hover:text-violet-400">How It Works</Link></li>
-                        <li><Link to="/pricing" className="hover:text-violet-400">Pricing</Link></li>
                     </ul>
                 </div>
                 <div>
@@ -42,7 +41,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="border-t border-slate-800/70 py-6 text-center text-sm text-slate-500">
-                © {new Date().getFullYear()} AvaHire. All rights reserved.
+                {new Date().getFullYear()} AvaHire. All rights reserved.
             </div>
         </footer>
     );
