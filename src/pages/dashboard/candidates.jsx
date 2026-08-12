@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 
-const seed = [
-    { id: 1, name: "Rahul Sharma", role: "Frontend Developer", score: 92, stage: "Shortlisted", exp: "5y", loc: "Bengaluru" },
-    { id: 2, name: "Anjali Patel", role: "Data Analyst", score: 88, stage: "Shortlisted", exp: "3y", loc: "Mumbai" },
-    { id: 3, name: "Saurabh Mishra", role: "Backend Developer", score: 75, stage: "Screened", exp: "6y", loc: "Remote" },
-    { id: 4, name: "Neha Kapoor", role: "UI/UX Designer", score: 68, stage: "Screened", exp: "4y", loc: "Bengaluru" },
-    { id: 5, name: "Amit Verma", role: "DevOps Engineer", score: 45, stage: "Rejected", exp: "2y", loc: "Delhi" },
-    { id: 6, name: "Priya Singh", role: "Frontend Developer", score: 82, stage: "Interviewed", exp: "4y", loc: "Chennai" },
-    { id: 7, name: "Karan Malhotra", role: "Product Manager", score: 90, stage: "Selected", exp: "7y", loc: "Pune" },
-];
+const seed = [];
 
 const stageColor = {
     Applied: "bg-slate-100 text-slate-700",
@@ -58,34 +50,43 @@ const Candidates = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filtered.map((c) => (
-                            <tr key={c.id} className="border-b border-slate-50 last:border-0 hover:bg-slate-50/40">
-                                <td className="py-4 px-6">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xs">
-                                            {c.name.split(" ").map(n => n[0]).join("")}
-                                        </div>
-                                        <div className="font-semibold text-slate-900">{c.name}</div>
-                                    </div>
-                                </td>
-                                <td className="text-slate-500">{c.role}</td>
-                                <td>
-                                    <span className={`font-bold ${c.score >= 80 ? "text-emerald-600" : c.score >= 65 ? "text-amber-600" : "text-rose-600"}`}>{c.score}%</span>
-                                </td>
-                                <td>
-                                    <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${stageColor[c.stage]}`}>{c.stage}</span>
-                                </td>
-                                <td className="text-slate-500">{c.exp}</td>
-                                <td className="text-slate-500">{c.loc}</td>
-                                <td className="pr-6">
-                                    <div className="flex gap-2 text-slate-400">
-                                        <button className="hover:text-violet-600" title="View"><i className="fa-solid fa-eye"></i></button>
-                                        <button className="hover:text-violet-600" title="Email"><i className="fa-solid fa-envelope"></i></button>
-                                        <button className="hover:text-slate-700"><i className="fa-solid fa-ellipsis-vertical"></i></button>
-                                    </div>
+                        {filtered.length === 0 ? (
+                            <tr>
+                                <td colSpan="7" className="text-center py-10 text-slate-400">
+                                    <i className="fa-solid fa-users text-2xl mb-2 text-slate-300 block"></i>
+                                    No candidates found in this stage
                                 </td>
                             </tr>
-                        ))}
+                        ) : (
+                            filtered.map((c) => (
+                                <tr key={c.id} className="border-b border-slate-50 last:border-0 hover:bg-slate-50/40">
+                                    <td className="py-4 px-6">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xs">
+                                                {c.name.split(" ").map(n => n[0]).join("")}
+                                            </div>
+                                            <div className="font-semibold text-slate-900">{c.name}</div>
+                                        </div>
+                                    </td>
+                                    <td className="text-slate-500">{c.role}</td>
+                                    <td>
+                                        <span className={`font-bold ${c.score >= 80 ? "text-emerald-600" : c.score >= 65 ? "text-amber-600" : "text-rose-600"}`}>{c.score}%</span>
+                                    </td>
+                                    <td>
+                                        <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${stageColor[c.stage]}`}>{c.stage}</span>
+                                    </td>
+                                    <td className="text-slate-500">{c.exp}</td>
+                                    <td className="text-slate-500">{c.loc}</td>
+                                    <td className="pr-6">
+                                        <div className="flex gap-2 text-slate-400">
+                                            <button className="hover:text-violet-600" title="View"><i className="fa-solid fa-eye"></i></button>
+                                            <button className="hover:text-violet-600" title="Email"><i className="fa-solid fa-envelope"></i></button>
+                                            <button className="hover:text-slate-700"><i className="fa-solid fa-ellipsis-vertical"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>

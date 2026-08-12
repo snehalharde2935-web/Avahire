@@ -6,49 +6,31 @@ import {
 } from "recharts";
 
 const kpis = [
-    { icon: "fa-briefcase", color: "bg-violet-100 text-violet-600", label: "Total Jobs", value: "12", sub: "2 Active Jobs", subColor: "text-slate-400" },
-    { icon: "fa-users", color: "bg-emerald-100 text-emerald-600", label: "Total Candidates", value: "342", sub: "+28 this week", subColor: "text-emerald-600" },
-    { icon: "fa-calendar", color: "bg-blue-100 text-blue-600", label: "Interviews Scheduled", value: "28", sub: "8 Today", subColor: "text-blue-600" },
-    { icon: "fa-chart-line", color: "bg-amber-100 text-amber-600", label: "Completed Interviews", value: "56", sub: "This month", subColor: "text-slate-400" },
-    { icon: "fa-circle-check", color: "bg-rose-100 text-rose-600", label: "Selected Candidates", value: "08", sub: "This month", subColor: "text-slate-400" },
+    { icon: "fa-briefcase", color: "bg-violet-100 text-violet-600", label: "Total Jobs", value: "0", sub: "0 Active Jobs", subColor: "text-slate-400" },
+    { icon: "fa-users", color: "bg-emerald-100 text-emerald-600", label: "Total Candidates", value: "0", sub: "0 this week", subColor: "text-emerald-600" },
+    { icon: "fa-calendar", color: "bg-blue-100 text-blue-600", label: "Interviews Scheduled", value: "0", sub: "0 Today", subColor: "text-blue-600" },
+    { icon: "fa-chart-line", color: "bg-amber-100 text-amber-600", label: "Completed Interviews", value: "0", sub: "This month", subColor: "text-slate-400" },
+    { icon: "fa-circle-check", color: "bg-rose-100 text-rose-600", label: "Selected Candidates", value: "0", sub: "This month", subColor: "text-slate-400" },
 ];
 
 const weekData = [
-    { d: "Mon", v: 6 }, { d: "Tue", v: 12 }, { d: "Wed", v: 7 }, { d: "Thu", v: 18 },
-    { d: "Fri", v: 11 }, { d: "Sat", v: 5 }, { d: "Sun", v: 3 },
+    { d: "Mon", v: 0 }, { d: "Tue", v: 0 }, { d: "Wed", v: 0 }, { d: "Thu", v: 0 },
+    { d: "Fri", v: 0 }, { d: "Sat", v: 0 }, { d: "Sun", v: 0 },
 ];
 
 const stageData = [
-    { name: "Applied", value: 120, pct: "35%", color: "#3b82f6" },
-    { name: "Screening", value: 88, pct: "26%", color: "#8b5cf6" },
-    { name: "Interview", value: 76, pct: "22%", color: "#f59e0b" },
-    { name: "Interviewed", value: 42, pct: "12%", color: "#14b8a6" },
-    { name: "Selected", value: 16, pct: "5%", color: "#22c55e" },
+    { name: "Applied", value: 0, pct: "0%", color: "#3b82f6" },
+    { name: "Screening", value: 0, pct: "0%", color: "#8b5cf6" },
+    { name: "Interview", value: 0, pct: "0%", color: "#f59e0b" },
+    { name: "Interviewed", value: 0, pct: "0%", color: "#14b8a6" },
+    { name: "Selected", value: 0, pct: "0%", color: "#22c55e" },
 ];
 
-const jobs = [
-    { t: "Frontend Developer", d: "Engineering", c: 45, s: "Active", date: "20 May 2024" },
-    { t: "Backend Developer", d: "Engineering", c: 38, s: "Active", date: "18 May 2024" },
-    { t: "Data Scientist", d: "Data Science", c: 32, s: "Active", date: "15 May 2024" },
-    { t: "UI/UX Designer", d: "Design", c: 28, s: "Draft", date: "10 May 2024" },
-    { t: "DevOps Engineer", d: "Engineering", c: 26, s: "Draft", date: "05 May 2024" },
-];
+const jobs = [];
+const topJobs = [];
 
-const upcoming = [
-    { n: "Rahul Sharma", r: "Frontend Developer", d: "24 May 2024", t: "10:00 AM", s: "Today", color: "bg-emerald-100 text-emerald-700" },
-    { n: "Anjali Mehta", r: "Backend Developer", d: "24 May 2024", t: "11:30 AM", s: "Today", color: "bg-emerald-100 text-emerald-700" },
-    { n: "Vikram Singh", r: "Data Scientist", d: "25 May 2024", t: "02:00 PM", s: "Tomorrow", color: "bg-blue-100 text-blue-700" },
-    { n: "Neha Patel", r: "UI/UX Designer", d: "25 May 2024", t: "04:30 PM", s: "Tomorrow", color: "bg-blue-100 text-blue-700" },
-    { n: "Arjun Verma", r: "DevOps Engineer", d: "26 May 2024", t: "11:00 AM", s: "Upcoming", color: "bg-amber-100 text-amber-700" },
-];
-
-const activity = [
-    { i: "fa-cloud-arrow-up", c: "bg-emerald-100 text-emerald-600", t: "12 resumes uploaded for Frontend Developer", by: "by Priya Mehta", time: "2h ago" },
-    { i: "fa-calendar-plus", c: "bg-violet-100 text-violet-600", t: "Interview scheduled with Rahul Sharma", by: "Frontend Developer", time: "3h ago" },
-    { i: "fa-circle-check", c: "bg-blue-100 text-blue-600", t: "Interview completed with Anjali Mehta", by: "Backend Developer", time: "5h ago" },
-    { i: "fa-envelope", c: "bg-amber-100 text-amber-600", t: "Interview link sent to 8 candidates", by: "by Priya Mehta", time: "1d ago" },
-    { i: "fa-trophy", c: "bg-rose-100 text-rose-600", t: "Vikram Singh moved to Selected", by: "Data Scientist", time: "1d ago" },
-];
+const upcoming = [];
+const activity = [];
 
 const Dashboard = () => {
     return (
@@ -97,10 +79,10 @@ const Dashboard = () => {
                     </ResponsiveContainer>
                     <div className="grid grid-cols-4 gap-3 mt-4">
                         {[
-                            { l: "Total", v: "28", c: "text-slate-900" },
-                            { l: "Scheduled", v: "18", c: "text-violet-600" },
-                            { l: "In Progress", v: "6", c: "text-amber-600" },
-                            { l: "Completed", v: "4", c: "text-emerald-600" },
+                            { l: "Total", v: "0", c: "text-slate-900" },
+                            { l: "Scheduled", v: "0", c: "text-violet-600" },
+                            { l: "In Progress", v: "0", c: "text-amber-600" },
+                            { l: "Completed", v: "0", c: "text-emerald-600" },
                         ].map((s) => (
                             <div key={s.l}>
                                 <div className="text-xs text-slate-500">{s.l}</div>
@@ -122,7 +104,7 @@ const Dashboard = () => {
                                 </PieChart>
                             </ResponsiveContainer>
                             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                <div className="text-2xl font-extrabold text-slate-900">342</div>
+                                <div className="text-2xl font-extrabold text-slate-900">0</div>
                                 <div className="text-xs text-slate-500">Total</div>
                             </div>
                         </div>
@@ -146,28 +128,26 @@ const Dashboard = () => {
                         <Link to="/app/jobs" className="text-xs text-violet-600 font-semibold">View All</Link>
                     </div>
                     <div className="space-y-3">
-                        {[
-                            { t: "Frontend Developer", d: "Engineering", c: 45, s: "Active", icon: "fa-code", ic: "bg-violet-100 text-violet-600" },
-                            { t: "Backend Developer", d: "Engineering", c: 38, s: "Active", icon: "fa-server", ic: "bg-blue-100 text-blue-600" },
-                            { t: "Data Scientist", d: "Data Science", c: 32, s: "Active", icon: "fa-chart-line", ic: "bg-emerald-100 text-emerald-600" },
-                            { t: "UI/UX Designer", d: "Design", c: 28, s: "Draft", icon: "fa-pen-ruler", ic: "bg-amber-100 text-amber-600" },
-                            { t: "DevOps Engineer", d: "Engineering", c: 26, s: "Draft", icon: "fa-gears", ic: "bg-rose-100 text-rose-600" },
-                        ].map((j) => (
-                            <div key={j.t} className="flex items-center gap-3">
-                                <div className={`w-9 h-9 rounded-lg ${j.ic} flex items-center justify-center text-sm`}>
-                                    <i className={`fa-solid ${j.icon}`}></i>
+                        {topJobs.length === 0 ? (
+                            <div className="text-sm text-slate-400 py-6 text-center">No active job openings</div>
+                        ) : (
+                            topJobs.map((j) => (
+                                <div key={j.t} className="flex items-center gap-3">
+                                    <div className={`w-9 h-9 rounded-lg ${j.ic} flex items-center justify-center text-sm`}>
+                                        <i className={`fa-solid ${j.icon}`}></i>
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-sm font-semibold text-slate-900 truncate">{j.t}</div>
+                                        <div className="text-xs text-slate-500">{j.d}</div>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-sm font-bold text-slate-900">{j.c}</div>
+                                        <div className="text-[10px] text-slate-400">Candidates</div>
+                                    </div>
+                                    <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${j.s === "Active" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>{j.s}</span>
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-semibold text-slate-900 truncate">{j.t}</div>
-                                    <div className="text-xs text-slate-500">{j.d}</div>
-                                </div>
-                                <div className="text-right">
-                                    <div className="text-sm font-bold text-slate-900">{j.c}</div>
-                                    <div className="text-[10px] text-slate-400">Candidates</div>
-                                </div>
-                                <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${j.s === "Active" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>{j.s}</span>
-                            </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                 </div>
             </div>
@@ -190,16 +170,22 @@ const Dashboard = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {jobs.map((j) => (
-                                    <tr key={j.t} className="border-b border-slate-50 last:border-0">
-                                        <td className="py-3 font-medium text-slate-900">{j.t}</td>
-                                        <td className="text-slate-500">{j.d}</td>
-                                        <td className="text-slate-900 font-semibold">{j.c}</td>
-                                        <td>
-                                            <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${j.s === "Active" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>{j.s}</span>
-                                        </td>
+                                {jobs.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="4" className="text-center py-6 text-slate-400">No recent jobs found</td>
                                     </tr>
-                                ))}
+                                ) : (
+                                    jobs.map((j) => (
+                                        <tr key={j.t} className="border-b border-slate-50 last:border-0">
+                                            <td className="py-3 font-medium text-slate-900">{j.t}</td>
+                                            <td className="text-slate-500">{j.d}</td>
+                                            <td className="text-slate-900 font-semibold">{j.c}</td>
+                                            <td>
+                                                <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${j.s === "Active" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>{j.s}</span>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -211,22 +197,26 @@ const Dashboard = () => {
                         <Link to="/app/calendar" className="text-xs text-violet-600 font-semibold">View Calendar</Link>
                     </div>
                     <div className="space-y-3">
-                        {upcoming.map((u) => (
-                            <div key={u.n} className="flex items-center gap-3 py-2">
-                                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xs">
-                                    {u.n.split(" ").map(n => n[0]).join("")}
+                        {upcoming.length === 0 ? (
+                            <div className="text-sm text-slate-400 py-6 text-center">No upcoming interviews scheduled</div>
+                        ) : (
+                            upcoming.map((u) => (
+                                <div key={u.n} className="flex items-center gap-3 py-2">
+                                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xs">
+                                        {u.n.split(" ").map(n => n[0]).join("")}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-sm font-semibold text-slate-900 truncate">{u.n}</div>
+                                        <div className="text-xs text-slate-500 truncate">{u.r}</div>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-[11px] text-slate-500">{u.d}</div>
+                                        <div className="text-[11px] text-slate-400">{u.t}</div>
+                                    </div>
+                                    <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${u.color}`}>{u.s}</span>
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-semibold text-slate-900 truncate">{u.n}</div>
-                                    <div className="text-xs text-slate-500 truncate">{u.r}</div>
-                                </div>
-                                <div className="text-right">
-                                    <div className="text-[11px] text-slate-500">{u.d}</div>
-                                    <div className="text-[11px] text-slate-400">{u.t}</div>
-                                </div>
-                                <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${u.color}`}>{u.s}</span>
-                            </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                 </div>
 
@@ -236,18 +226,22 @@ const Dashboard = () => {
                         <button className="text-xs text-violet-600 font-semibold">View All</button>
                     </div>
                     <div className="space-y-4">
-                        {activity.map((a, i) => (
-                            <div key={i} className="flex gap-3">
-                                <div className={`w-9 h-9 rounded-lg ${a.c} flex items-center justify-center shrink-0`}>
-                                    <i className={`fa-solid ${a.i}`}></i>
+                        {activity.length === 0 ? (
+                            <div className="text-sm text-slate-400 py-6 text-center">No recent activity</div>
+                        ) : (
+                            activity.map((a, i) => (
+                                <div key={i} className="flex gap-3">
+                                    <div className={`w-9 h-9 rounded-lg ${a.c} flex items-center justify-center shrink-0`}>
+                                        <i className={`fa-solid ${a.i}`}></i>
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="text-sm font-medium text-slate-900 leading-snug">{a.t}</div>
+                                        <div className="text-xs text-slate-500 mt-0.5">{a.by}</div>
+                                    </div>
+                                    <div className="text-[11px] text-slate-400 shrink-0">{a.time}</div>
                                 </div>
-                                <div className="flex-1">
-                                    <div className="text-sm font-medium text-slate-900 leading-snug">{a.t}</div>
-                                    <div className="text-xs text-slate-500 mt-0.5">{a.by}</div>
-                                </div>
-                                <div className="text-[11px] text-slate-400 shrink-0">{a.time}</div>
-                            </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                 </div>
             </div>

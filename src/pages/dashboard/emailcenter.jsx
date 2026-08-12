@@ -8,11 +8,7 @@ const templates = [
     { id: 4, name: "Offer Letter", subject: "Your offer from {{company}}", uses: 42 },
 ];
 
-const sent = [
-    { id: 1, to: "rahul.sharma@email.com", subject: "You're invited to interview", opened: true, sent: "2h ago" },
-    { id: 2, to: "anjali.patel@email.com", subject: "Great news! You've been shortlisted", opened: true, sent: "5h ago" },
-    { id: 3, to: "8 candidates", subject: "Interview link", opened: false, sent: "1d ago" },
-];
+const sent = [];
 
 const EmailCenter = () => {
     const [tab, setTab] = useState("templates");
@@ -52,21 +48,28 @@ const EmailCenter = () => {
 
             {tab === "sent" && (
                 <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
-                    {sent.map((s) => (
-                        <div key={s.id} className="flex items-center gap-4 px-6 py-4 border-b border-slate-50 last:border-0">
-                            <div className={`w-10 h-10 rounded-full ${s.opened ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"} flex items-center justify-center`}>
-                                <i className={`fa-solid ${s.opened ? "fa-envelope-open" : "fa-envelope"}`}></i>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <div className="font-semibold text-slate-900 truncate">{s.subject}</div>
-                                <div className="text-xs text-slate-500">To: {s.to}</div>
-                            </div>
-                            <div className="text-xs text-slate-400">{s.sent}</div>
-                            <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${s.opened ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>
-                                {s.opened ? "Opened" : "Delivered"}
-                            </span>
+                    {sent.length === 0 ? (
+                        <div className="p-12 text-center text-slate-400">
+                            <i className="fa-solid fa-paper-plane text-2xl mb-2 text-slate-300 block"></i>
+                            No sent emails yet.
                         </div>
-                    ))}
+                    ) : (
+                        sent.map((s) => (
+                            <div key={s.id} className="flex items-center gap-4 px-6 py-4 border-b border-slate-50 last:border-0">
+                                <div className={`w-10 h-10 rounded-full ${s.opened ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"} flex items-center justify-center`}>
+                                    <i className={`fa-solid ${s.opened ? "fa-envelope-open" : "fa-envelope"}`}></i>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="font-semibold text-slate-900 truncate">{s.subject}</div>
+                                    <div className="text-xs text-slate-500">To: {s.to}</div>
+                                </div>
+                                <div className="text-xs text-slate-400">{s.sent}</div>
+                                <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${s.opened ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>
+                                    {s.opened ? "Opened" : "Delivered"}
+                                </span>
+                            </div>
+                        ))
+                    )}
                 </div>
             )}
         </div>

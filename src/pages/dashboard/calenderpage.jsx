@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 
-const events = {
-    24: [{ t: "Rahul Sharma", time: "10:00 AM", role: "Frontend" }, { t: "Anjali Patel", time: "11:30 AM", role: "Data" }],
-    25: [{ t: "Vikram Singh", time: "2:00 PM", role: "Data Scientist" }, { t: "Neha Patel", time: "4:30 PM", role: "UI/UX" }],
-    26: [{ t: "Arjun Verma", time: "11:00 AM", role: "DevOps" }],
-    28: [{ t: "Team sync", time: "9:00 AM", role: "Internal" }],
-};
+const events = {};
 
 const CalendarPage = () => {
-    const [month] = useState("May 2024");
+    const [month] = useState("August 2026");
     const days = Array.from({ length: 31 }, (_, i) => i + 1);
-    const firstDay = 2; // Wed
+    const firstDay = 6; // Sat
     const cells = [...Array(firstDay).fill(null), ...days];
-    const today = 24;
+    const today = 12;
 
     return (
         <div className="space-y-6" data-testid="calendar-page">

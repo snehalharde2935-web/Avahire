@@ -16,15 +16,11 @@ const analyseResume = (name, jobRole) => {
     };
 };
 
-const seed = [
-    { id: 1, name: "Rahul Sharma", role: "Frontend Developer", uploaded: "2h ago" },
-    { id: 2, name: "Anjali Patel", role: "Data Analyst", uploaded: "5h ago" },
-    { id: 3, name: "Saurabh Mishra", role: "Backend Developer", uploaded: "1d ago" },
-];
+const seed = [];
 
 const Resumes = () => {
     const [items, setItems] = useState(seed.map((s) => ({ ...s, analysis: analyseResume(s.name, s.role) })));
-    const [selectedId, setSelectedId] = useState(items[0].id);
+    const [selectedId, setSelectedId] = useState(items[0]?.id || null);
     const [jobRole, setJobRole] = useState("Frontend Developer");
     const [loading, setLoading] = useState(false);
 
@@ -90,30 +86,37 @@ const Resumes = () => {
                         </div>
                     )}
                     <div className="max-h-[560px] overflow-y-auto">
-                        {items.map((c) => (
-                            <button
-                                key={c.id}
-                                data-testid={`resume-item-${c.id}`}
-                                onClick={() => setSelectedId(c.id)}
-                                className={`w-full text-left px-5 py-4 border-b border-slate-50 last:border-0 flex items-center gap-3 transition ${selectedId === c.id ? "bg-violet-50" : "hover:bg-slate-50"}`}
-                            >
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xs">
-                                    {c.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-semibold text-slate-900 truncate">{c.name}</div>
-                                    <div className="text-xs text-slate-500 truncate">{c.role} · {c.uploaded}</div>
-                                </div>
-                                <div className={`text-sm font-bold ${c.analysis.score >= 80 ? "text-emerald-600" : c.analysis.score >= 65 ? "text-amber-600" : "text-rose-600"}`}>
-                                    {c.analysis.score}%
-                                </div>
-                            </button>
-                        ))}
+                        {items.length === 0 ? (
+                            <div className="p-8 text-center text-slate-400 text-sm">
+                                <i className="fa-solid fa-users text-2xl mb-2 text-slate-300 block"></i>
+                                No candidates screened yet.<br/>Upload resumes to get started.
+                            </div>
+                        ) : (
+                            items.map((c) => (
+                                <button
+                                    key={c.id}
+                                    data-testid={`resume-item-${c.id}`}
+                                    onClick={() => setSelectedId(c.id)}
+                                    className={`w-full text-left px-5 py-4 border-b border-slate-50 last:border-0 flex items-center gap-3 transition ${selectedId === c.id ? "bg-violet-50" : "hover:bg-slate-50"}`}
+                                >
+                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white font-bold text-xs">
+                                        {c.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-sm font-semibold text-slate-900 truncate">{c.name}</div>
+                                        <div className="text-xs text-slate-500 truncate">{c.role} · {c.uploaded}</div>
+                                    </div>
+                                    <div className={`text-sm font-bold ${c.analysis.score >= 80 ? "text-emerald-600" : c.analysis.score >= 65 ? "text-amber-600" : "text-rose-600"}`}>
+                                        {c.analysis.score}%
+                                    </div>
+                                </button>
+                            ))
+                        )}
                     </div>
                 </div>
 
                 {/* Right analysis */}
-                {selected && (
+                {selected ? (
                     <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
                         <div className="flex items-start gap-5">
                             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-white font-bold">
@@ -174,6 +177,16 @@ const Resumes = () => {
                                 Reject
                             </button>
                         </div>
+                    </div>
+                ) : (
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center flex flex-col items-center justify-center min-h-[400px]">
+                        <div className="w-16 h-16 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center mb-4 text-xl">
+                            <i className="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 className="text-lg font-bold text-slate-900">Select a Candidate</h3>
+                        <p className="text-slate-500 text-sm mt-1 max-w-xs mx-auto">
+                            Click on a candidate in the list to view detailed AI resume analysis, matching score, and insights.
+                        </p>
                     </div>
                 )}
             </div>
